@@ -204,8 +204,9 @@ int main(int argc, char *argv[])
   // Put in header crc valid flag and crc
   *((uint32_t*)(au8HeaderBuffer + HEADER_DATA_CRC_VALID_OFFSET)) = (uint32_t)0x1;
   // Last thing, calculate header data crc
+  // BUT don't include the last u32, it is the header checksum
   u32HeaderCrc32 = 0;
-  crc32(au8HeaderBuffer, HEADER_LENGTH, &u32HeaderCrc32);
+  crc32(au8HeaderBuffer, (HEADER_LENGTH - sizeof(u32HeaderCrc32)), &u32HeaderCrc32);
   // Slice it in
   *((uint32_t*)(au8HeaderBuffer + HEADER_DATA_CRC32_OFFSET)) = u32HeaderCrc32;
   printf("Added header data crc32: " "0x%08" PRIX32 "\n", u32HeaderCrc32);
