@@ -118,25 +118,16 @@ Infinite_Loop:
 	b	Infinite_Loop
 	.size	Default_Handler, .-Default_Handler
 
-
-
-
-
-
-
+/**
+ * @brief  Image header begin data to make it runnable as is.
+*/
  	.section	.image_header_begin,"a",%progbits
 	.type	g_headerBegin, %object
 	.size	g_headerBegin, .-g_headerBegin
 
-
 g_headerBegin:
 	.word	_estack
 	.word	Reset_Handler
-
-
-
-
-
 
 /******************************************************************************
 *
